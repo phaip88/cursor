@@ -1,0 +1,22 @@
+{
+  "name": "cloudflare-email-sender",
+  "version": "1.0.0",
+  "description": "基于 Cloudflare Workers 的邮件发送系统，支持 Resend API",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "keywords": ["cloudflare", "workers", "email", "resend"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20231218.0",
+    "@types/node": "^20.10.5",
+    "typescript": "^5.3.3",
+    "wrangler": "^3.19.0"
+  },
+  "dependencies": {
+    "hono": "^3.11.7"
+  }
+}
