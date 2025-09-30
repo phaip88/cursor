@@ -1,7 +1,10 @@
-name: 部署到 Cloudflare Workers
+name: 🚀 自动部署到 Cloudflare Workers
 
 on:
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
   workflow_dispatch:
@@ -9,21 +12,29 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: 部署
+    name: 部署到 Cloudflare
     steps:
-      - name: 检出代码
-        uses: actions/checkout@v3
+      - name: 📥 检出代码
+        uses: actions/checkout@v4
 
-      - name: 设置 Node.js
-        uses: actions/setup-node@v3
+      - name: 📦 设置 Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: 'npm'
 
-      - name: 安装依赖
-        run: npm install
+      - name: 🔧 安装依赖
+        run: npm ci
 
-      - name: 部署到 Cloudflare Workers
+      - name: 🚀 部署到 Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
+      - name: ✅ 部署成功通知
+        if: success()
+        run: |
+          echo "🎉 部署成功！"
+          echo "访问您的应用: https://email-sender.YOUR_SUBDOMAIN.workers.dev"
