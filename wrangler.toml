@@ -2,15 +2,11 @@ name = "email-sender"
 main = "src/index.ts"
 compatibility_date = "2024-01-01"
 
-[env.production]
-vars = { ENVIRONMENT = "production" }
-
-# KV 命名空间用于存储配置
+# KV 命名空间配置
+# 使用以下命令创建：
+# wrangler kv:namespace create "CONFIG_KV"
+# wrangler kv:namespace create "CONFIG_KV" --preview
 [[kv_namespaces]]
 binding = "CONFIG_KV"
-id = "请在部署时使用 wrangler kv:namespace create CONFIG_KV 创建并替换此 ID"
-preview_id = "请在部署时使用 wrangler kv:namespace create CONFIG_KV --preview 创建并替换此 ID"
-
-# 环境变量说明
-# 使用 wrangler secret put ADMIN_PASSWORD 设置管理员密码
-# 默认密码为 admin123
+id = "请替换为您的KV命名空间ID"
+preview_id = "请替换为您的预览KV命名空间ID"
